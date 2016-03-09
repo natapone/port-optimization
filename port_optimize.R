@@ -1,18 +1,16 @@
-# source("port_utils.R")
+source("port_utils.R")
 
 library('quantmod')
 
 library('tseries')
 library('zoo')
 
-tickers = spl('SPY,EFA,EWJ,EEM,IYR,RWX,IEF,TLT,DBC,GLD')
-
-
-getSymbols(c('QQQ','SPY'))
-
-require("zoo")			# For diff() method.
-X <- diff(log(as.zoo(EuStockMarkets)))
-res <- portfolio.optim(X)
+# tickers = spl('SPY,EFA,EWJ,EEM,IYR,RWX,IEF,TLT,DBC,GLD')
+# getSymbols(c('QQQ','SPY'))
+#
+# require("zoo")			# For diff() method.
+# X <- diff(log(as.zoo(EuStockMarkets)))
+# res <- portfolio.optim(X)
 
 
 xxx = get_hist()
@@ -21,8 +19,9 @@ yyy <- diff(log(as.zoo(xxx)))
 max_limit = c(0.1,0.1,0.1,0.15,1,1,1,1,1,1,1,1,1,1)
 max_limit = c(0,0,0,0,0,0,0,0,0,0,1,1,1,1)
 max_limit = c(0.1,0,0.1,0.15,0,0,0,0,0,0,1,1,1,1)
-max_limit = c(0.05,0.05,0,0.15,1,1,1,1,0.5,0.1,0,1,1,1) # current
-res <- portfolio.optim(yyy,reshigh = max_limit, rf=0.05)
+max_limit = c(0.05,0.05,0,0.15,1,1,1,1,0.5,0.1,0,1,1,1)
+max_limit = c(0.1,0,0.1,0.15,0,0,0,1,1,0,0,0,0,1) # current
+res <- portfolio.optim(yyy,reshigh = max_limit, rf=0.5)
 round(res$pw, digits = 2)
 
 op_port = data.frame(
